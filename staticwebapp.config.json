@@ -5,8 +5,7 @@
       "methods": [
         "get"
       ],
-      "rewrite": "/index.html",
-      "redirect": "/news-list"
+      "rewrite": "/news-list"
     }
   ]
 }
