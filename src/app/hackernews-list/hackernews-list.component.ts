@@ -12,11 +12,12 @@ import { HackernewsDetailsComponent } from '../hackernews-details/hackernews-det
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-hackernews-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatFormFieldModule, MatInputModule,MatCardModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatFormFieldModule, MatInputModule,MatCardModule, MatIconModule],
   templateUrl: './hackernews-list.component.html',
   styleUrl: './hackernews-list.component.css',
 })
