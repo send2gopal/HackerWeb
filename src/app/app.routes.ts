@@ -5,6 +5,10 @@ import { HackernewsDetailsComponent } from './hackernews-details/hackernews-deta
 
 export const routes: Routes = [
   {
+    path: '',
+    component: HackernewsListComponent,
+  },
+  {
     path: 'news-list',
     component: HackernewsListComponent,
   },
