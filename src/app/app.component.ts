@@ -14,9 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'hackerui';
-  isLoading: Observable<boolean>;
+  isLoading: Observable<boolean> | undefined;
 
   constructor(private loaderService: LoaderService) {
+  }
+
+  ngOnInit(): void {
     this.isLoading = this.loaderService.isLoading$;
   }
 }
