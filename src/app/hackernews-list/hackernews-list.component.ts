@@ -1,37 +1,45 @@
-import { Component } from '@angular/core';
+
 import { HackerNewsDatService } from '../../shared/services/hacker-new-data.services';
-import { share } from 'rxjs';
 import { PagedViewModel } from '../../shared/interfaces/pagedViewModel';
 import { StoryDetails } from '../../shared/interfaces/storyDetails';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-hackernews-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule],
   templateUrl: './hackernews-list.component.html',
   styleUrl: './hackernews-list.component.css',
 })
 export class HackernewsListComponent {
+  displayedColumns: string[] = ['id', 'by', 'descendants', 'score', 'time', 'title', 'type', 'url'];
+  dataSource = new MatTableDataSource<StoryDetails>();
+  totalRecords = 0;
+  pageSize = 10;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   pagedData: PagedViewModel<StoryDetails> | undefined;
   pageNumber = 1;
-  pageSize = 10;
+
   constructor(private hackerNewsDataService: HackerNewsDatService) {}
 
   ngOnInit(): void {
-    this.loadHackerNews();
+    this.loadStories(0, this.pageSize);
   }
 
-  loadHackerNews(): void {
-    this.hackerNewsDataService
-      .getHackerNewsList(this.pageNumber, this.pageSize)
-      .subscribe({
-        next: (data) => {
-          this.pagedData = data;
-          console.log(this.pagedData);
-        },
-        error: (error) => {
-          // Handle errors if needed
-          console.error('Error fetching users:', error);
-        },
-      });
+  ngAfterViewInit(): void {
+    this.paginator.page.pipe(
+      tap(() => this.loadStories(this.paginator.pageIndex, this.paginator.pageSize))
+    ).subscribe();
+  }
+  loadStories(page: number, size: number): void {
+    this.hackerNewsDataService.getHackerNewsList(page + 1, size).subscribe((response: PagedViewModel<StoryDetails>) => {
+      this.dataSource.data = response.results;
+      this.totalRecords = response.total;
+    });
   }
 }
