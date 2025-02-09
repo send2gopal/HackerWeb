@@ -1,13 +1,12 @@
 {
   "routes": [
     {
-      "navigationFallback": {
-        "rewrite": "/index.html",
-        "exclude": [
-          "/images/*.{png,jpg,gif}",
-          "/css/*"
-        ]
-      }
+      "route": "/news-list",
+      "methods": [
+        "get"
+      ],
+      "rewrite": "/index.html",
+      "redirect": "/news-list"
     }
   ]
 }
