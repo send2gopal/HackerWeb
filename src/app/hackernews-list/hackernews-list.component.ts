@@ -6,11 +6,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
+import { HackernewsDetailsComponent } from '../hackernews-details/hackernews-details.component';
 @Component({
   selector: 'app-hackernews-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatDialogModule],
   templateUrl: './hackernews-list.component.html',
   styleUrl: './hackernews-list.component.css',
 })
@@ -25,7 +27,7 @@ export class HackernewsListComponent {
   pagedData: PagedViewModel<StoryDetails> | undefined;
   pageNumber = 1;
 
-  constructor(private hackerNewsDataService: HackerNewsDatService) {}
+  constructor(private hackerNewsDataService: HackerNewsDatService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadStories(0, this.pageSize);
@@ -42,4 +44,14 @@ export class HackernewsListComponent {
       this.totalRecords = response.total;
     });
   }
+  /*
+  Some links does not render in iframe, so we can not use this code.
+  openDetails(url: string): void {
+    this.dialog.open(HackernewsDetailsComponent, {
+      width: '100%',
+      height: '100%',
+      data: { url }
+    });
+    
+  }*/
 }
