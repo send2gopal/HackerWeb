@@ -1,0 +1,11 @@
+{
+  "routes": [
+    {
+      "route": "/news-list",
+      "methods": [
+        "get"
+      ],
+      "rewrite": "/news-list"
+    }
+  ]
+}
