@@ -1,5 +1,11 @@
 <div class="banner">
-    <h2>Hacker News</h2>
+    <h2>Hacker News By Gopal Kumar Thakur</h2>
+    <div>
+      <a routerLink="/news-list" >Click! here to view Hacker News</a>
+      <p style="color: red;"> 
+        Paging is not implemented in Hacker News, and it has been mimicked in the .NET app. As a result, you may occasionally see fewer records due to filtering. Additionally, the search functionality will only work on the current page.
+      </p>
+    </div>
   </div>
   <div>
     <mat-spinner *ngIf="isLoading | async" class="overlay-spinner"></mat-spinner>
