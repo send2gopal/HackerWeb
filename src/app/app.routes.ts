@@ -4,10 +4,10 @@ import { AppComponent } from './app.component';
 import { HackernewsDetailsComponent } from './hackernews-details/hackernews-details.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: HackernewsListComponent,
-  },
+  // {
+  //   path: '',
+  //   component: HackernewsListComponent,
+  // },
   {
     path: 'news-list',
     component: HackernewsListComponent,
