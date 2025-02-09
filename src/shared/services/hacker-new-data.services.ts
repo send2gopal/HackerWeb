@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class HackerNewsDatService {
+export class HackerNewsDataService {
 
     constructor(private http: HttpClient) {}
 

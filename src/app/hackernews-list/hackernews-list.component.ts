@@ -1,5 +1,5 @@
 
-import { HackerNewsDatService } from '../../shared/services/hacker-new-data.services';
+import { HackerNewsDataService } from '../../shared/services/hacker-new-data.services';
 import { PagedViewModel } from '../../shared/interfaces/pagedViewModel';
 import { StoryDetails } from '../../shared/interfaces/storyDetails';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -27,7 +27,7 @@ export class HackernewsListComponent {
   pagedData: PagedViewModel<StoryDetails> | undefined;
   pageNumber = 1;
 
-  constructor(private hackerNewsDataService: HackerNewsDatService, private dialog: MatDialog) {}
+  constructor(private hackerNewsDataService: HackerNewsDataService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadStories(0, this.pageSize);

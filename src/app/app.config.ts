@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpLoaderInterceptor } from '../shared/interceptors/http-loader.interceptor';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi(), withFetch()), provideAnimationsAsync(),
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true }, provideAnimationsAsync(),
+    
   ],
 };
