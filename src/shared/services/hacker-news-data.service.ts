@@ -1,5 +1,5 @@
-import { StoryDetails } from '../interfaces/storyDetails';
-import { PagedViewModel } from '../interfaces/pagedViewModel';
+import { StoryDetails } from '../interfaces/story-details';
+import { PagedViewModel } from '../interfaces/paged-view-model';
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';

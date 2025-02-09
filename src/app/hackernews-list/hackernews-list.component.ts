@@ -1,7 +1,7 @@
 
-import { HackerNewsDataService } from '../../shared/services/hacker-new-data.services';
-import { PagedViewModel } from '../../shared/interfaces/pagedViewModel';
-import { StoryDetails } from '../../shared/interfaces/storyDetails';
+import { HackerNewsDataService } from '../../shared/services/hacker-news-data.service';
+import { PagedViewModel } from '../../shared/interfaces/paged-view-model';
+import { StoryDetails } from '../../shared/interfaces/story-details';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';

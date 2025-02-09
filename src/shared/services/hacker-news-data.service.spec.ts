@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HackerNewsDataService } from './hacker-new-data.services';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HackerNewsDataService } from './hacker-news-data.service';
 import { environment } from '../../environments/environment';
-import { PagedViewModel } from '../interfaces/pagedViewModel';
-import { StoryDetails } from '../interfaces/storyDetails';
+import { PagedViewModel } from '../interfaces/paged-view-model';
+import { StoryDetails } from '../interfaces/story-details';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('HackerNewsDataService', () => {
   let service: HackerNewsDataService;
@@ -11,8 +12,7 @@ describe('HackerNewsDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [HackerNewsDataService]
+      providers: [HackerNewsDataService,provideHttpClient(), provideHttpClientTesting()]
     });
     service = TestBed.inject(HackerNewsDataService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -26,15 +26,14 @@ describe('HackerNewsDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch hacker news list with correct URL and data', () => {
-    // Arrange
+  it('should fetch hacker news list with correct URL and headers', () => {
     const mockResponse: PagedViewModel<StoryDetails> = {
       page: 1,
       size: 10,
       total: 1,
       count: 1,
       results: [
-        { id: 1, title: 'Test Story', url: 'http://example.com', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
+        { id: 1, title: 'Test Story', url: 'http://mockurlforstory.com', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
       ],
       metadata: {},
       errors: [],
@@ -45,7 +44,6 @@ describe('HackerNewsDataService', () => {
     const pageSize = 10;
     const expectedUrl = `${environment.BASE_API_URL}/hackernews/new-stories?pageNumber=${pageNumber}&pageSize=${pageSize}`;
 
-    // Act and Assert
     service.getHackerNewsList(pageNumber, pageSize).subscribe(response => {
       expect(response.page).toBe(mockResponse.page);
       expect(response.size).toBe(mockResponse.size);
