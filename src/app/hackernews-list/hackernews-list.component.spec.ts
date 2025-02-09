@@ -10,6 +10,8 @@ import { StoryDetails } from '../../shared/interfaces/story-details';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 describe('HackernewsListComponent', () => {
   let component: HackernewsListComponent;
@@ -20,7 +22,7 @@ describe('HackernewsListComponent', () => {
     const hackerNewsDataServiceSpy = jasmine.createSpyObj('HackerNewsDataService', ['getHackerNewsList']);
     
     await TestBed.configureTestingModule({
-      imports: [MatTableModule, MatPaginatorModule, MatDialogModule, HackernewsListComponent, NoopAnimationsModule],
+      imports: [MatTableModule, MatPaginatorModule, MatDialogModule, HackernewsListComponent, NoopAnimationsModule, MatFormFieldModule, MatInputModule],
       providers: [
         { provide: HackerNewsDataService, useValue: hackerNewsDataServiceSpy },
         { provide: MatDialog, useValue: {} },

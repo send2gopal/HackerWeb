@@ -9,10 +9,14 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { HackernewsDetailsComponent } from '../hackernews-details/hackernews-details.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+
 @Component({
   selector: 'app-hackernews-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatDialogModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatFormFieldModule, MatInputModule,MatCardModule],
   templateUrl: './hackernews-list.component.html',
   styleUrl: './hackernews-list.component.css',
 })
@@ -43,6 +47,11 @@ export class HackernewsListComponent {
       this.dataSource.data = response.results;
       this.totalRecords = response.total;
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   /*
   Some links does not render in iframe, so we can not use this code.
