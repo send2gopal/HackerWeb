@@ -7,7 +7,7 @@ import { HackernewsListComponent } from './hackernews-list.component';
 import { HackerNewsDataService } from '../../shared/services/hacker-news-data.service';
 import { PagedViewModel } from '../../shared/interfaces/paged-view-model';
 import { StoryDetails } from '../../shared/interfaces/story-details';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,11 +20,12 @@ describe('HackernewsListComponent', () => {
     const hackerNewsDataServiceSpy = jasmine.createSpyObj('HackerNewsDataService', ['getHackerNewsList']);
     
     await TestBed.configureTestingModule({
-      imports: [MatTableModule, MatPaginatorModule, MatDialogModule, HttpClientTestingModule, HackernewsListComponent, NoopAnimationsModule],
+      imports: [MatTableModule, MatPaginatorModule, MatDialogModule, HackernewsListComponent, NoopAnimationsModule],
       providers: [
         { provide: HackerNewsDataService, useValue: hackerNewsDataServiceSpy },
         { provide: MatDialog, useValue: {} },
-        provideHttpClient()
+        provideHttpClient(),
+        provideHttpClientTesting()
       ]
     }).compileComponents();
 
@@ -44,7 +45,7 @@ describe('HackernewsListComponent', () => {
       total: 1,
       count: 1,
       results: [
-        { id: 1, title: 'Test Story', url: 'http://example.com', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
+        { id: 1, title: 'Test Story', url: 'http://mockurlforstory.com', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
       ],
       metadata: {},
       errors: [],
@@ -66,8 +67,8 @@ describe('HackernewsListComponent', () => {
       total: 2,
       count: 2,
       results: [
-        { id: 1, title: 'Test Story 1', url: 'http://example.com/1', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
-        { id: 2, title: 'Test Story 2', url: 'http://example.com/2', by: 'user2', time: '1234567891', descendants: 20, score: 200, type: 'story' }
+        { id: 1, title: 'Test Story 1', url: 'http://mockurlforstory.com/1', by: 'user1', time: '1234567890', descendants: 10, score: 100, type: 'story' },
+        { id: 2, title: 'Test Story 2', url: 'http://mockurlforstory.com/2', by: 'user2', time: '1234567891', descendants: 20, score: 200, type: 'story' }
       ],
       metadata: {},
       errors: [],
